@@ -40,7 +40,7 @@ The code consists of the main files
 * `main_rom_opti.py`: the main file for experiment in Section 5.3,
 * `main_adaptive_opti.py`: the main file for experiment in Section 5.4.
 
-The modeling and discretization of the problem are realized in the following files:
+The modeling and discretization of the problem is realized in the following files:
 
 * `discretizer.py`: discretizes the problem to obtain a full-order model (FOM),
 * `model.py`: contains the implementation of the full-order or reduced-order model (ROM),
