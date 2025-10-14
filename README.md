@@ -5,8 +5,8 @@
 # This file is part of the paper:
 #   
 #           "Optimality-Based Control Space Reduction for Infinite-Dimensional Control Spaces"
-#
-# Preprint:
+# by Michael Kartmann and Stefan Volkwein
+# Preprint: TODO
 #
 # Copyright 2025 all developers. All rights reserved.
 # License: Licensed as BSD 2-Clause License (http://opensource.org/licenses/BSD-2-Clause)
