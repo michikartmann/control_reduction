@@ -1,0 +1,9 @@
+name: control_reduction
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - fenics=2019.1.0
+  - numpy
+  - scipy
+  - matplotlib
