@@ -1,5 +1,5 @@
 # Optimality-Based Control Space Reduction for Infinite-Dimensional Control Spaces
-
+[![DOI](https://zenodo.org/badge/1076122268.svg)](https://doi.org/10.5281/zenodo.17356820)
 ```
 # ~~~
 # This file is part of the paper:
