@@ -39,16 +39,16 @@ python main_rom_opti.py
 
 The code consists of the main files
 
-* `main_rom_opti.py`: the main file for experiment in Section 5.3,
-* `main_adaptive_opti.py`: the main file for experiment in Section 5.4.
+* `main_rom_opti.py`: the main file for the experiment in Section 5.3,
+* `main_adaptive_opti.py`: the main file for the experiment in Section 5.4.
 
-The modeling and discretization of the problem is realized in the following files:
+The modeling and discretization of the problem is realized in a [PyMORish](https://pymor.org)-way in the following files:
 
 * `discretizer.py`: discretizes the problem to obtain a full-order model (FOM),
 * `model.py`: contains the implementation of the full-order or reduced-order model (ROM),
 * `reductor.py`: reduces the full-order model to obtain a reduced-order model,
 
-Moreover, the following files contain the code for the adaptive optimization algorithm
+Moreover, the following file contains the code for the adaptive optimization algorithm
 
 * `adaptive_opt.py:` contains the implementation of adaptive POD optimization method (Algorithm 1).
 
