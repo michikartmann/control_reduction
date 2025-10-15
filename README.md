@@ -19,16 +19,18 @@ In this repository, we provide the code for the numerical experiments of the pap
 
 ## Setup 
 
-To run the code you need to install the python package FEniCS 2019 in your (local) environment together with SciPy, Numpy and Matplotlib. E.g. FEniCS 2019 can be installed using `conda` via
+To run the code you need to install the python package FEniCS 2019 in your (local) environment together with SciPy, Numpy and Matplotlib. This can be done using `conda` via
 ```
-conda install conda-forge::fenics
+conda create -n control_reduction -c conda-forge python=3.9 fenics=2019.1.0 numpy scipy matplotlib
+
 ```
-or using `pip` via
+or using the provided `environment.yml`-file via
 ```
-pip install fenics
+conda env create -f environment.yml
 ```
 After installing all the packages, run one of the experiments, e.g. by
 ```
+conda activate control_reduction
 python main_rom_opti.py
 ```
 
