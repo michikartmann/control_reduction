@@ -15,7 +15,15 @@
 # ~~~
 ```
 
-In this repository, we provide the code for the numerical experiments of the paper "Optimality-Based Control Space Reduction for Infinite-Dimensional Control Spaces" by Michael Kartmann and Stefan Volkwein. A preprint is available [here](todo).
+In this repository, we provide the code for the numerical experiments of the paper "Optimality-Based Control Space Reduction for Infinite-Dimensional Control Spaces" by Michael Kartmann and Stefan Volkwein. A preprint is available [here]([https://arxiv.org/abs/2510.14479]).
+
+## Citation
+
+If you are using the code, please consider citing via
+
+    M. Kartmann, S Volkwein
+    Code for ”Optimality-Based Control Reduction for Infinite-Dimensional Control Spaces” (2025)
+    https://zenodo.org/records/17356821
 
 ## Setup 
 
