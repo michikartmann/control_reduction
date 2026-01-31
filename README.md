@@ -6,7 +6,7 @@
 #   
 #           "Optimality-Based Control Space Reduction for Infinite-Dimensional Control Spaces"
 # by Michael Kartmann and Stefan Volkwein
-# Preprint: [https://arxiv.org/abs/2510.14479]
+# Preprint: https://arxiv.org/abs/2510.14479
 #
 # Copyright 2025 all developers. All rights reserved.
 # License: Licensed as BSD 2-Clause License (http://opensource.org/licenses/BSD-2-Clause)
