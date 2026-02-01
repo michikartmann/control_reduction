@@ -18,10 +18,10 @@ import os
 # %% flags
 
 # vary beta to run experiments
-beta = 1e-1
+# beta = 1e-1
 # beta = 1e-2
 # beta = 1e-3
-# beta = 1e-4
+beta = 1e-4
 
 # folders and flags
 data_folder = 'data/'
@@ -79,7 +79,7 @@ optionsBB_exact = fom.set_default_options(tol=1e-12,
                                           solve_true=True)
 
 # for inner solver
-inneroptions = fom.set_default_options(tol=tol,
+inneroptions = fom.set_default_options(tol=1e-10,
                                        maxit=maxit,
                                        save=False,
                                        plot=False,
@@ -125,26 +125,26 @@ os.makedirs(folder, exist_ok=True)
 original_stdout = sys.stdout
 sys.stdout = Tee(filepath)
 
-#### FOM optimization
-print('FOM optimization ...')
-u_fom, history_fom = fom.solve_ocp(U_0,
-                                   options=optionsBB)
-fom.print_info()
-if derivativecheck:
-    fom.derivative_check(derivativecheck)
-filename = 'fom.pkl'
-path = os.path.join(folder, filename)
-with open(path, 'wb') as f:
-    pickle.dump(history_fom, f)
-
-# compute exact solution
-print('Compute FOM exact solution ...')
-u_exact, history_exact = fom.solve_ocp(u_fom,
-                                       options=optionsBB_exact)
-filename = 'fom_exact.pkl'
-path = os.path.join(folder, filename)
-with open(path, 'wb') as f:
-    pickle.dump(history_exact, f)
+# #### FOM optimization
+# print('FOM optimization ...')
+# u_fom, history_fom = fom.solve_ocp(U_0,
+#                                    options=optionsBB)
+# fom.print_info()
+# if derivativecheck:
+#     fom.derivative_check(derivativecheck)
+# filename = 'fom.pkl'
+# path = os.path.join(folder, filename)
+# with open(path, 'wb') as f:
+#     pickle.dump(history_fom, f)
+#
+# # compute exact solution
+# print('Compute FOM exact solution ...')
+# u_exact, history_exact = fom.solve_ocp(u_fom,
+#                                        options=optionsBB_exact)
+# filename = 'fom_exact.pkl'
+# path = os.path.join(folder, filename)
+# with open(path, 'wb') as f:
+#     pickle.dump(history_exact, f)
 
 #### ROM
 print('ROM optimization ...')
