@@ -18,8 +18,8 @@ import os
 # %% flags
 
 # vary beta to run experiments
-beta = 1e-1
-# beta = 1e-2
+# beta = 1e-1
+beta = 1e-2
 # beta = 1e-3
 # beta = 1e-4
 
@@ -157,8 +157,8 @@ path = os.path.join(folder, filename)
 with open(path, 'wb') as f:
     pickle.dump(history_rom, f)
 
-#### Full-ROM
-print('Full-ROM optimization ...')
+#### Control-ROM
+print('Control-ROM optimization ...')
 u_fullrom, history_fullrom, fullrom = adaptive_optimization(fom, r_pod, U_0, l_POD, options, control_reduced=True)
 fullrom.print_info()
 if derivativecheck:
@@ -188,7 +188,7 @@ plt.rcParams['lines.linewidth'] = 2
 #### timings
 plt.figure()
 plt.title(label='Timings')
-categories = ['FOM', 'ROM', 'Full-ROM']
+categories = ['FOM', 'ROM', 'Control-ROM']
 values = [
     history_fom["time"],
     history_rom["time"],
@@ -201,7 +201,7 @@ plt.ylabel('Time')
 #### timings speedup plot
 plt.figure()
 plt.title(label='Speedups')
-categories = ['ROM', 'Full-ROM']
+categories = ['ROM', 'Control-ROM']
 values = [
     history_fom["time"] / history_rom["time"],
     history_fom["time"] / history_fullrom["time"]

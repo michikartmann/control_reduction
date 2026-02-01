@@ -40,13 +40,13 @@ def print_results(fom, history_fom, history_rom, history_fullrom, history_exact)
         f'ROM: lower est: {history_rom["lower_est"][-1]: 2.4e}, true error: {true_error: 2.4e}, est: {history_rom["est"]: 2.4e}, grad_norm: {history_rom["grad_norm"]: 2.4e}, est true?: {history_rom["lower_est"][-1] <= true_error <= history_rom["est"]}')
     print(f'Error ROM - FOM: {fom.space_time_norm(history_rom["U_opt"] - history_fom["U_opt"])}')
 
-    print(f'Full-ROM -------- k: {history_fullrom["k"]}------------------------')
+    print(f'Control-ROM -------- k: {history_fullrom["k"]}------------------------')
     print(
         f'FULL-ROM: time: {history_fullrom["time"]: .3f}, speed-up: {history_fom["time"] / history_fullrom["time"]: .3f}')
     true_error_c = fom.space_time_norm(history_exact['U_opt'] - history_fullrom['U_opt'], space_norm="control")
     print(
         f'FULL-ROM: lower est: {history_fullrom["lower_est"][-1]: 2.4e}, true error: {true_error_c: 2.4e}, est: {history_fullrom["est"]: 2.4e}, grad_norm: {history_fullrom["grad_norm"]: 2.4e}, est true?: {history_fullrom["lower_est"][-1] <= true_error <= history_fullrom["est"]}')
-    print(f'Error Full-ROM - ROM: {fom.space_time_norm(history_rom["U_opt"] - history_fullrom["U_opt"])}')
+    print(f'Error Control-ROM - ROM: {fom.space_time_norm(history_rom["U_opt"] - history_fullrom["U_opt"])}')
 
 
 def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, plot_folder, beta, fontsize=15,
@@ -90,16 +90,16 @@ def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, 
             fom.plot_3d(history_rom['U_opt'][:, kk], title=fr'ROM control $t$ = {fom.time_disc.t_v[kk]}', path=path)
 
         #### FULL-ROM
-        # Full-ROM state
+        # Control-ROM state
         for kk in k_set:
             path = plot_folder + fr'fullrom_state_dim{fom.state_dim}_K{fom.time_disc.K}_beta{beta}_k{kk}.eps'
-            fom.plot_3d(history_fullrom['Y_opt'][:, kk], title=fr'Full-ROM state $t$ = {fom.time_disc.t_v[kk]}',
+            fom.plot_3d(history_fullrom['Y_opt'][:, kk], title=fr'Control-ROM state $t$ = {fom.time_disc.t_v[kk]}',
                         path=path)
 
-        # Full-ROM state
+        # Control-ROM state
         for kk in k_set:
             path = plot_folder + fr'fullrom_control_dim{fom.state_dim}_K{fom.time_disc.K}_beta{beta}_k{kk}.eps'
-            fom.plot_3d(history_fullrom['U_opt'][:, kk], title=fr'Full-ROM control $t$ = {fom.time_disc.t_v[kk]}',
+            fom.plot_3d(history_fullrom['U_opt'][:, kk], title=fr'Control-ROM control $t$ = {fom.time_disc.t_v[kk]}',
                         path=path)
 
         # norms
@@ -108,14 +108,14 @@ def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, 
                                fom.space_norm_trajectory(history_fullrom['Y_opt'], norm='output'),
                                fom.space_norm_trajectory(history_rom['Y_opt'], norm='output')
                                ],
-                              strings=[r'$y_d$', 'FOM', 'Full-ROM', 'ROM'], semi=True, title='State norm')
+                              strings=[r'$y_d$', 'FOM', 'Control-ROM', 'ROM'], semi=True, title='State norm')
 
         fom.visualize_1d_many([
             fom.space_norm_trajectory(history_fom['U_opt'], norm='control'),
             fom.space_norm_trajectory(history_fullrom['U_opt'], norm='control'),
             fom.space_norm_trajectory(history_rom['U_opt'], norm='control')
         ],
-            strings=['FOM', 'Full-ROM', 'ROM'], semi=True, title='Control norm')
+            strings=['FOM', 'Control-ROM', 'ROM'], semi=True, title='Control norm')
 
     #### convergence plots
     plt.figure()
@@ -134,7 +134,7 @@ def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, 
     for u_k in history_rom['u_k']:
         true_norm_nc.append(fom.space_time_norm(u_exact - u_k, 'control'))
     plt.figure()
-    plt.semilogy(history_rom['gradient_norm'], label=r'$\nabla J(u_k)$', linestyle='-.', marker='D')
+    plt.semilogy(history_rom['gradient_norm'], label=r'$|\nabla J(u_k)|$', linestyle='-.', marker='D')
     plt.semilogy(history_rom['upper_est'], label=r'$\bar \Delta(u_k)$', linestyle='--', marker='o')
     plt.semilogy(history_rom['lower_est'], label=r'$\underaccent{\bar}{\Delta}(u_k)$', linestyle=':', marker='x')
     plt.semilogy(true_norm_nc, label=r'$e(u_k)$', linestyle='-', marker='^')
@@ -151,13 +151,13 @@ def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, 
     for u_k in history_fullrom['u_k']:
         true_norm_c.append(fom.space_time_norm(u_exact - u_k, 'control'))
     plt.figure()
-    plt.semilogy(history_fullrom['gradient_norm'], label=r'$\nabla J(u_k)$', linestyle='-.', marker='D')
+    plt.semilogy(history_fullrom['gradient_norm'], label=r'$|\nabla J(u_k)|$', linestyle='-.', marker='D')
     plt.semilogy(history_fullrom['upper_est'], label=r'$\bar \Delta(u_k)$', linestyle='--', marker='o')
     plt.semilogy(history_fullrom['lower_est'], label=r'$\underaccent{\bar}{\Delta}(u_k)$', linestyle=':', marker='x')
     plt.semilogy(true_norm_c, label=r'$e(u_k)$', linestyle='-', marker='^')
     plt.legend(fontsize=fontsize)
     plt.grid(True)
-    plt.title(r'Full-ROM', fontsize=fontsize)
+    plt.title(r'Control-ROM', fontsize=fontsize)
     plt.xlabel(r'$k$', fontsize=fontsize)
     plt.xticks(fontsize=fontsize)
     plt.yticks(fontsize=fontsize)
@@ -166,7 +166,7 @@ def plot_results(fom, history_fom, history_rom, history_fullrom, history_exact, 
 
     # basis size against iter
     plt.figure()
-    plt.plot(history_fullrom['basis_size'], label='Full-ROM', linestyle='-', marker='o')
+    plt.plot(history_fullrom['basis_size'], label='Control-ROM', linestyle='-', marker='o')
     plt.plot(history_rom['basis_size'], label='ROM', linestyle=':', marker='x')
     plt.legend(fontsize=fontsize)
     plt.grid(True)

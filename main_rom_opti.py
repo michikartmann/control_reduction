@@ -124,7 +124,7 @@ e_p = fom.space_time_norm(r_pod.ROMtoFOM(history_fullrom['P_opt']) - r_pod.ROMto
                           space_norm="L2")
 print(f'Results')
 print(f'time rom: {history_rom["time"]}')
-print(f'time full-rom: {history_fullrom["time"]}')
+print(f'time control-rom: {history_fullrom["time"]}')
 print(f'speed-up: {history_rom["time"] / history_fullrom["time"]}')
 print(f'error control: {e_u}, L2-error state: {e_y}, L2-error adjoint: {e_p}')
 print('-------------------------------------------------------------------')
